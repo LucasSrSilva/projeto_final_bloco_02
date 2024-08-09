@@ -1,0 +1,19 @@
+import { Controller, UseGuards, HttpCode, HttpStatus, Post, Body } from "@nestjs/common";
+import { AuthService } from "../services/auth.service";
+import { LocalAuthGuard } from "../guard/local-auth.guard";
+import { UsuarioLogin } from "../entities/usuariologin.entity";
+
+
+@Controller("/usuarios")
+export class AuthController {
+    constructor(private authService: AuthService) { }
+
+    @UseGuards(LocalAuthGuard)
+    @HttpCode(HttpStatus.OK)
+    @Post('/logar')
+    async login(@Body() user: UsuarioLogin): Promise<any> {
+        console.log(this.authService.login(user))
+        return this.authService.login(user);
+    }
+
+}
