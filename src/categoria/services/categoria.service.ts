@@ -13,7 +13,9 @@ export class CategoriaService {
 
     async findAll(): Promise<Categoria[]>{
         return await this.CategoriaRepository.find({
-            
+            relations: {
+                produto: true
+            }
         })
     }
 
@@ -22,7 +24,9 @@ export class CategoriaService {
             where: {
                 id
             },
-            
+            relations: {
+                produto: true
+            }
         })
 
         if (!buscaCategoria) {
@@ -37,7 +41,9 @@ export class CategoriaService {
             where: {
                 titulo: ILike(`%${titulo}%`)
             },
-            
+            relations: {
+                produto: true
+            }
         })
     }
 
